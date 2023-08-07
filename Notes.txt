@@ -1,0 +1,76 @@
+Accumulator - Used for input/output operation.
+Base - Used to store address.
+Counter - Used to count and running loops.
+Data - Used to hold and print data.
+--------------------------------------------------
+ax,bx,cx,dx are called GENERAL PURPOSE REGISTERS
+--------------------------------------------------
+Code Segment - Store the code part.
+Data Segment - Store the data part.
+Stack Segment - Store the stack part.
+Extra Segmnet - Extended segment of code segment
+--------------------------------------------------
+There are code SEGMENT REGISTERS
+--------------------------------------------------
+Source Index - Points the source operand
+Destination Index - Points the destination operand
+---------------------------------------------------
+Instruction Pointer - Holds the next instruction
+Stack Pointer - Points current top of stack
+Flag Register - Holds current status of the program
+Base Pointer - Base of the top of stack
+----------------------------------------------------
+ mov ah,1 = Input char with echo
+ mov ah,2 = Print a single char
+ mov ah,8 = Input char withput echo
+ mov ah,9 = Print collection of char/string
+ mov ah,4ch = Exit
+-----------------------------------------------------
+int = Used to interrupt current execution and interact with I/O device
+int 21h = Interrupt for text handeling
+int 20h = Interrupt for video/graphics handling
+-------------------------------------------------------
+.model = Initialises the program size
+
+ tiny = Code+Data <= 64 KB
+ small = Code <= 64KB, Data <= 64KB
+ Medium = Code = Any size, Data <= 64KB
+ Compact = Code <= 64KB, Data = Any size
+ Large = Code = Any size, Data = Any size
+ Huge = Code = Any size, Data = Any size
+---------------------------------------------------------
+dosseg ;dos segment, manages the segments of the program
+.model small
+.stack 100h
+.data ;data segment defined here
+.code ;code written here 
+main proc ;main procedure
+
+mov ah,4ch ;return from ah after printing any value
+int 21h
+main endp ;end of procedure
+end main ;end of main
+
+------------------------------------------------------------
+Initializer Directive :
+
+db define byte | 1 byte
+dw define word | 2 bytes
+dd define double word | 4 bytes
+dq define quad word | 8 bytes
+dt define ten bytes | 10 bytes
+$ is used at the end of any string
+The data has to be moved to the accumulator in the code part by mov ax,@data
+The ax is further moved to ds (data segment) to make the data available in
+the heap memory for faster usage.
+--------------------------------------------------------------
+To print string from a variable, offset is used
+offset return the beginning adress of the variable in 16bits. So, dx is used.
+Alternatively, we can use lea(load effective address) as a pointer to the 
+address of the string variable.
+--------------------------------------------------------------------------------
+compare - cmp
+jump - jmp
+jump if qual - je
+jump if not qual - jne
+
